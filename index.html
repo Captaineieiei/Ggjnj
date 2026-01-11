@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA HUB | GALACTIC EDITION</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Kanit:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0; padding: 0; box-sizing: border-box;
+  font-family: 'Kanit', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: #020208;
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* พื้นหลัง Nova */
+.nova-gradient {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 20% 30%, #1a0b35 0%, transparent 40%),
+              radial-gradient(circle at 80% 70%, #0d1b3a 0%, transparent 40%);
+  z-index: -1;
+}
+
+/* Page Control: แก้ไขให้แสดงผลแน่นอน */
+.page { display: none; padding: 15px; width: 100%; max-width: 500px; margin: 0 auto; position: relative; }
+.active-page { display: block !important; animation: fadeIn 0.3s ease; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Navbar */
+.nav-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 20px; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(15px);
+  position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(161, 140, 209, 0.2);
+}
+.logo { font-family: 'Syncopate', sans-serif; font-size: 18px; letter-spacing: 2px; background: linear-gradient(45deg, #fff, #a18cd1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.logo span { color: #fbc2eb; -webkit-text-fill-color: #fbc2eb; }
+
+/* Main Page */
+.hero { text-align: center; padding: 30px 0; }
+.hero h1 { font-family: 'Syncopate', sans-serif; font-size: 26px; margin-bottom: 5px; }
+
+.script-card {
+  background: rgba(255, 255, 255, 0.03); border-radius: 18px; overflow: hidden;
+  margin-bottom: 25px; border: 1px solid rgba(255, 255, 255, 0.05); cursor: pointer;
+}
+.card-img-holder img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+.card-body { padding: 18px; }
+
+/* View Page [อิงตามรูป 1000224562.jpg] */
+.back-btn {
+  background: #ff3131; color: white; border: none; padding: 10px 18px;
+  border-radius: 8px; font-weight: 600; margin-bottom: 20px; cursor: pointer;
+}
+.detail-img { width: 100%; border-radius: 15px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
+.desc-title { color: #ff3131; font-size: 18px; font-weight: 600; margin-bottom: 12px; }
+.desc-content { color: #ccc; font-size: 14px; line-height: 1.8; margin-bottom: 30px; }
+
+/* Modal (หน้าต่างโชว์สคริปต์) */
+.modal {
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); z-index: 1000;
+  align-items: center; justify-content: center;
+}
+.modal-content {
+  background: #0f0f1a; width: 90%; max-width: 400px; padding: 25px;
+  border-radius: 20px; border: 1px solid #a18cd1; text-align: center;
+}
+.script-box {
+  width: 100%; height: 120px; background: #000; border: 1px solid #222;
+  border-radius: 10px; color: #00ff96; padding: 15px; font-family: monospace;
+  font-size: 11px; overflow-y: auto; margin: 15px 0; word-break: break-all;
+}
+
+/* Buttons */
+.btn-nova {
+  width: 100%; padding: 15px; background: linear-gradient(45deg, #a18cd1, #fbc2eb);
+  border: none; border-radius: 12px; color: #000; font-weight: 800; cursor: pointer;
+}
+.btn-play {
+  width: 100%; padding: 15px; background: #1a1f2b; border: none;
+  border-radius: 12px; color: white; font-weight: 600; margin-bottom: 12px; cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="nova-gradient"></div>
+
+<nav class="nav-bar">
+  <div class="logo">NOVA<span>HUB</span></div>
+</nav>
+
+<div id="main-page" class="page active-page">
+  <div class="hero">
+    <h1>NOVA<span>HUB</span></h1>
+    <p style="color:#a18cd1; font-size:12px;">PREMIUM MOBILE EXECUTOR</p>
+  </div>
+
+  <div class="script-card" onclick="changePage('view-page')">
+    <div class="card-img-holder">
+      <img src="https://cdn.discordapp.com/attachments/1270769914269008002/1460056620460675092/noFilter.webp?ex=69658730&is=696435b0&hm=d4a3b88bf2de5ae5237ba306f2cc5eae061a0a2bc3ae7e2aa5f709e5be6e5f12&">
+    </div>
+    <div class="card-body">
+      <h2 style="color:#fbc2eb; font-size: 18px;">Escape the Tsunami on Bike</h2>
+      <p style="color:#888; font-size: 12px;">Auto Win, Speed, BestEgg...</p>
+      <button class="btn-nova" style="margin-top:10px;">VIEW DETAILS</button>
+    </div>
+  </div>
+</div>
+
+<div id="view-page" class="page">
+  <button class="back-btn" onclick="changePage('main-page')">❮ Back to Scripts</button>
+  
+  <img src="https://cdn.discordapp.com/attachments/1270769914269008002/1460056620460675092/noFilter.webp?ex=69658730&is=696435b0&hm=d4a3b88bf2de5ae5237ba306f2cc5eae061a0a2bc3ae7e2aa5f709e5be6e5f12&" class="detail-img">
+  
+  <h2 style="font-size:24px; margin-bottom:5px;">Escape the Tsunami on Bike</h2>
+  <p style="color:#a18cd1; font-size:12px; margin-bottom:20px;">👁 491 Views | 📅 12 Jan 2026</p>
+
+  <div class="description-section">
+    <h3 class="desc-title">Description</h3>
+    <div class="desc-content">
+      <p>• Auto Win System</p>
+      <p>• Galactic Speed Multiplier</p>
+      <p>• Spawn BestEgg</p>
+    </div>
+  </div>
+
+  <button class="btn-play">🎮 Play Game</button>
+  <button class="btn-nova" onclick="openModal()">☁ Get Script</button>
+</div>
+
+<div id="scriptModal" class="modal">
+  <div class="modal-content">
+    <h3 style="color:#fbc2eb;">NOVA SCRIPT</h3>
+    <div class="script-box" id="scriptText">_G.NovaHub = true; loadstring(game:HttpGet("https://raw.githubusercontent.com/Nova/Main/Loader.lua"))()</div>
+    <button class="btn-nova" onclick="copyScript()">COPY CODE</button>
+    <p style="color:#555; font-size:12px; margin-top:15px; cursor:pointer;" onclick="closeModal()">[ Close Window ]</p>
+  </div>
+</div>
+
+<script>
+// ฟังก์ชันสลับหน้า: แก้ไขให้ทำงานได้ 100%
+function changePage(id) {
+  // ซ่อนทุกหน้า
+  const pages = document.getElementsByClassName('page');
+  for (let i = 0; i < pages.length; i++) {
+    pages[i].classList.remove('active-page');
+  }
+  // แสดงหน้าที่เลือก
+  const targetPage = document.getElementById(id);
+  if (targetPage) {
+    targetPage.classList.add('active-page');
+    window.scrollTo(0,0);
+  }
+}
+
+function openModal() { document.getElementById('scriptModal').style.display = 'flex'; }
+function closeModal() { document.getElementById('scriptModal').style.display = 'none'; }
+
+function copyScript() {
+  const text = document.getElementById('scriptText').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('คัดลอกสคริปต์ไปยังคลิปบอร์ดแล้ว!');
+  }).catch(err => {
+    console.error('Copy failed', err);
+  });
+}
+</script>
+
+</body>
+</html>
