@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA HUB</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Kanit:wght@300;400;500;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Kanit', sans-serif; }
+
+body { background: #020208; color: #fff; min-height: 100vh; overflow-x: hidden; }
+
+/* Nova Background */
+.nova-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% -20%, #2a0e4a 0%, #020208 80%); z-index: -1; }
+
+/* Page System */
+.page { display: none; width: 100%; max-width: 450px; margin: 0 auto; padding: 15px; }
+.active-page { display: block !important; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Navbar */
+.nav-bar { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(161, 140, 209, 0.2); }
+.logo { font-family: 'Syncopate', sans-serif; font-size: 18px; letter-spacing: 2px; }
+.logo span { color: #fbc2eb; }
+
+/* Cards */
+.script-card { background: rgba(255, 255, 255, 0.04); border-radius: 20px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(255, 255, 255, 0.08); cursor: pointer; }
+.card-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+.card-content { padding: 20px; }
+
+/* View Page */
+.back-btn { background: #ff3131; color: white; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 600; margin-bottom: 20px; cursor: pointer; }
+.detail-img { width: 100%; border-radius: 18px; margin-bottom: 20px; }
+.view-info { display: flex; gap: 15px; color: #a18cd1; font-size: 13px; margin-bottom: 25px; }
+.view-count { color: #fbc2eb; font-weight: 600; }
+
+.desc-title { color: #ff3131; font-size: 19px; font-weight: 600; margin-bottom: 12px; }
+.desc-text { color: #bbb; font-size: 14px; line-height: 1.8; margin-bottom: 30px; }
+
+/* Buttons */
+.btn-nova { width: 100%; padding: 16px; background: linear-gradient(45deg, #a18cd1, #fbc2eb); border: none; border-radius: 15px; color: #000; font-weight: 800; cursor: pointer; text-transform: uppercase; }
+.btn-play { width: 100%; padding: 16px; background: #1a1f2b; border: none; border-radius: 15px; color: white; margin-bottom: 12px; cursor: pointer; }
+
+/* Modal */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+.modal-box { background: #0a0a12; width: 100%; max-width: 380px; padding: 30px; border-radius: 25px; border: 1px solid #a18cd1; text-align: center; }
+.code-area { background: #000; padding: 15px; color: #00ff96; font-family: monospace; font-size: 11px; margin: 20px 0; word-break: break-all; text-align: left; border-radius: 10px; }
+</style>
+</head>
+<body>
+
+<div class="nova-bg"></div>
+
+<nav class="nav-bar">
+    <div class="logo">NOVA<span>HUB</span></div>
+</nav>
+
+<div id="main-page" class="page active-page">
+    <div style="text-align: center; padding: 30px 0;">
+        <h1 style="font-family:'Syncopate'; font-size:22px;">SCRIPTS</h1>
+    </div>
+
+    <div class="script-card" onclick="openScript('tsunami', 'Escape the Tsunami on Bike')">
+        <img src="https://cdn.discordapp.com/attachments/1270769914269008002/1460056620460675092/noFilter.webp?ex=69658730&is=696435b0&hm=d4a3b88bf2de5ae5237ba306f2cc5eae061a0a2bc3ae7e2aa5f709e5be6e5f12&" class="card-img">
+        <div class="card-content">
+            <h2 style="color:#fbc2eb; font-size:18px;">Escape the Tsunami on Bike</h2>
+            <p style="color:#888; font-size:12px;">Premium Features Activated</p>
+        </div>
+    </div>
+</div>
+
+<div id="view-page" class="page">
+    <button class="back-btn" onclick="showMain()">❮ Back</button>
+    <img src="https://cdn.discordapp.com/attachments/1270769914269008002/1460056620460675092/noFilter.webp?ex=69658730&is=696435b0&hm=d4a3b88bf2de5ae5237ba306f2cc5eae061a0a2bc3ae7e2aa5f709e5be6e5f12&" class="detail-img">
+    <h2 id="view-title" style="font-size:24px; margin-bottom:5px;">Loading...</h2>
+    
+    <div class="view-info">
+        <span class="view-count">👁 <span id="count-num">0</span> Views</span>
+        <span>📅 12 Jan 2026</span>
+    </div>
+
+    <div class="description">
+        <h3 class="desc-title">Description</h3>
+        <div class="desc-text">
+            <p>• Auto Win (High Speed)</p>
+            <p>• Anti-Ban System</p>
+            <p>• Instant Egg Hatch</p>
+        </div>
+    </div>
+
+    <button class="btn-play">🎮 Play Game</button>
+    <button class="btn-nova" onclick="document.getElementById('m-box').style.display='flex'">☁ Get Script</button>
+</div>
+
+<div id="m-box" class="modal">
+    <div class="modal-box">
+        <h3 style="color:#fbc2eb;">SCRIPT CODE</h3>
+        <div class="code-area" id="c-text">loadstring(game:HttpGet("https://raw.githubusercontent.com/Nova/Main/Loader.lua"))()</div>
+        <button class="btn-nova" onclick="copyC()">COPY</button>
+        <p style="color:#444; margin-top:15px; font-size:12px; cursor:pointer;" onclick="document.getElementById('m-box').style.display='none'">[ CLOSE ]</p>
+    </div>
+</div>
+
+<script>
+function openScript(id, title) {
+    document.getElementById('view-title').innerText = title;
+    
+    // ระบบนับคนจริง
+    let v = parseInt(localStorage.getItem('v_' + id)) || 0;
+    if (!sessionStorage.getItem('s_' + id)) {
+        v += 1;
+        localStorage.setItem('v_' + id, v);
+        sessionStorage.setItem('s_' + id, '1');
+    }
+    
+    document.getElementById('count-num').innerText = v;
+    
+    document.getElementById('main-page').classList.remove('active-page');
+    document.getElementById('view-page').classList.add('active-page');
+    window.scrollTo(0,0);
+}
+
+function showMain() {
+    document.getElementById('view-page').classList.remove('active-page');
+    document.getElementById('main-page').classList.add('active-page');
+}
+
+function copyC() {
+    const t = document.getElementById('c-text').innerText;
+    navigator.clipboard.writeText(t).then(() => alert('Copied!'));
+}
+</script>
+
+</body>
+</html>
